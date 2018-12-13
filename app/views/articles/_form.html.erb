@@ -1,12 +1,5 @@
-<% if @article.errors.any? %>
+<%= render 'shared/errors', obj: @article %>
 
-	<h2>Here are the errors:</h2>
-	<ul>
-		<% @article.errors.full_messages.each do |msg| %>
-		<li><%= msg %></li>
-		<% end %>
-	</ul>
-<% end %>
 	<div class="row">
 		<div class="col-xs-12">
 			<%= form_for(@article, :html => {class: "form-horizontal", role: "form"}) do |f| %>
