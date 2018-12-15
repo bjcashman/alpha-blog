@@ -1,8 +1,14 @@
 class ArticlesController < ApplicationController
 	before_action :set_article, only: [:edit, :update, :show, :destroy]
+	
+
+
 	def index
 		@articles = Article.all
+	end
 
+	def index
+		@articles = Article.paginate(page: params[:page], per_page: 5)
 	end
 
 	def new
@@ -10,21 +16,19 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
-
 	end
 
 	def create
 
-		@article = Article.new(article_params)
-		@article = User.first
-	
-		if @article.save
-			flash[:success] = "Article successfully created"
-			redirect_to article_path(@article)
-		else
-			render 'new'
-		end
-	end
+    @article = Article.new(article_params)
+    @article.user = User.first
+    if @article.save
+      flash[:success] = "Article was successfully created"
+      redirect_to article_path(@article)
+    else
+      render 'new'
+    end
+  end
 
 	def update
 
